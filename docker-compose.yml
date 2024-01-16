@@ -7,9 +7,9 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
             MYSQL_DATABASE: 'default'
 
-    php72:
-        build: docker/php72/
-        image: talisorm/php72:latest
+    php74:
+        build: docker/php74/
+        image: talisorm/php74:latest
         volumes:
             - ./:/app:cached
             - ~/.composer:/tmp

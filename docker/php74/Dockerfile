@@ -1,4 +1,4 @@
-FROM php:7.2-cli-alpine
+FROM php:7.4-cli-alpine
 
 # Needed for running Scrutinizer's ocular.phar
 RUN apk add --no-cache git

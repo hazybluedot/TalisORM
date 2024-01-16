@@ -3,7 +3,7 @@
 namespace TalisOrm;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\ResultStatement;
+use Doctrine\DBAL\Result;
 use InvalidArgumentException;
 use function is_a;
 use LogicException;
@@ -202,7 +202,7 @@ final class AggregateRepository
                     Aggregate::VERSION_COLUMN,
                     $entity->tableName(),
                     $entity->identifier()
-                )->fetchColumn();
+                )->fetchFirstColumn();
                 if ($aggregateVersionInDb >= $aggregateVersion) {
                     throw ConcurrentUpdateOccurred::ofEntity($entity);
                 }
@@ -230,9 +230,9 @@ final class AggregateRepository
      * This method might have been on Connection itself...
      *
      * @param array<string, mixed> $where
-     * @return ResultStatement<mixed>
+     * @return Result<mixed>
      */
-    private function select(string $selectExpression, string $tableExpression, array $where): ResultStatement
+    private function select(string $selectExpression, string $tableExpression, array $where): Result
     {
         Assert::string($selectExpression);
         Assert::string($tableExpression);
